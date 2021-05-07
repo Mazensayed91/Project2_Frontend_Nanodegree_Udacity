@@ -1,24 +1,8 @@
-// Here i include jquery to get the height of the elements
+// Here i get the height of the elements
 
-var head = document.getElementsByTagName('head')[0];
-var script = document.createElement('script');
-script.type = 'text/javascript';
-script.src = "http://code.jquery.com/jquery-2.2.1.min.js";
 document.addEventListener('DOMContentLoaded', ()=>{
 
-
-    script.onreadystatechange = handler;
-    script.onload = handler;
-
-    // Fire the loading
-    head.appendChild(script);
-
-    function handler(){
-       console.log('jquery added :)');
-       section_length = $('.your-active-class').height();
-       header_length = $('.main__hero').height();
-    }
-
+       header_length = document.querySelector("header").offsetHeight;
     
 });
 
@@ -63,22 +47,37 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 
 
 // Loop over all sections, fire the section on window, when scrolling.
+document.addEventListener("DOMContentLoaded", ()=>{
+    document.addEventListener('scroll', function(e) {
 
-document.addEventListener('scroll', function(e) {
-    console.log(document.querySelector('.main__hero').style.height);
+        setTimeout(() => {
+            section_length = sections[0].offsetHeight;
+            //console.log(header);
+            lastKnownScrollPosition = window.scrollY-header_length;
+            let index = Math.ceil(lastKnownScrollPosition / section_length)-1;  
 
-    lastKnownScrollPosition = window.scrollY-header_length;
-    //console.log(window.scrollY);
-    let index = Math.ceil(lastKnownScrollPosition / section_length)-1
-    for(l of li_s){
-        l.style.backgroundColor = "black";
-    }
-    for(section of sections){
-        section.classList.remove("your-active-class");
-    }
-    if(index>=0){
-    sections[index].className += "your-active-class";
-    li_s[index].style.backgroundColor = "red";
-    //console.log(index);
-    }
-  });
+            for(l of li_s){
+                l.style.backgroundColor = "black";
+            }
+            for(section of sections){
+                section.classList.remove("your-active-class");
+                section.style.backgroundColor = "black";
+            }
+            if(index>=0){
+            if(sections[index] != undefined){
+            sections[index].className += "your-active-class";
+            sections[index].style.backgroundColor = "blue";
+            li_s[index].style.backgroundColor = "red";
+            }
+            }
+            
+    
+    }, 200);
+
+        //console.log(window.scrollY);
+        
+        //console.log(index);
+      });
+
+})
+
