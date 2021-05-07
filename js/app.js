@@ -39,10 +39,10 @@ let li_s = document.querySelectorAll("li");
 
 // Get the height of the page
 
-var body = document.body,
+let body = document.body,
     html = document.documentElement;
     
-var height = Math.max( body.scrollHeight, body.offsetHeight, 
+let height = Math.max( body.scrollHeight, body.offsetHeight, 
     html.clientHeight, html.scrollHeight, html.offsetHeight );
 
 
